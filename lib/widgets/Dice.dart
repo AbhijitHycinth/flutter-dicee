@@ -1,33 +1,22 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class Dice extends StatefulWidget {
-  int diceNumber;
+  final Function() rollDice;
+  final int number;
 
-  Dice(this.diceNumber);
+  Dice(this.number, {this.rollDice});
 
   @override
-  DiceState createState() => DiceState(diceNumber: this.diceNumber);
+  DiceState createState() => DiceState();
 }
 
 class DiceState extends State<Dice> {
-  int diceNumber;
-
-  DiceState({this.diceNumber});
-
-  void onPressed() {
-    setState(() {
-      diceNumber = Random().nextInt(6) + 1;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      onPressed: this.onPressed,
+      onPressed: widget.rollDice,
       child: Image.asset(
-        'images/dice$diceNumber.png',
+        'images/dice' + (widget.number.toString()) + '.png',
       ),
     );
   }
